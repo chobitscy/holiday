@@ -8,14 +8,12 @@ const routes = [
         component: () => import('@/pages/edit')
     },
     {
-        path: '/result/:values',
+        path: '/result',
         component: () => import('@/pages/result'),
-        props: true
     }
 ];
 
 const routers = new VueRouter({
-    mode: 'history',
     routes
 });
 
