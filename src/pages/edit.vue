@@ -4,6 +4,7 @@
         <el-input placeholder="班级" v-model="values.cla"/>
         <el-input placeholder="理由" v-model="values.reason"/>
         <el-input placeholder="辅导员" v-model="values.counselor"/>
+        <el-input placeholder="承诺书" v-model="values.commitment"/>
         <div style="display:flex;justify-content: center">
             <el-checkbox v-model="checked">
                 <div @click="dialogVisible = true">同意《个人安全协议》</div>
@@ -29,7 +30,8 @@
                     applicant: null,
                     cla: null,
                     reason: null,
-                    counselor: null
+                    counselor: null,
+                    commitment: null
                 },
                 checked: false,
                 dialogVisible: false

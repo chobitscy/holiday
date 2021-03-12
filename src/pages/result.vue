@@ -41,15 +41,23 @@
                     <div class="info-item">
                         <div class="info-text">附 件：</div>
                         <div>
-                            <el-image :src="'https://img.ams1.imgbed.xyz/2021/03/11/1uqJr.png'"
-                                      style="width: 50px;height: 50px;"/>
+                            <el-image :src="'https://img.ams1.imgbed.xyz/2021/03/12/1KTEH.png'"
+                                      style="width: 70px;height: 20px;"
+                                      :previewSrcList="['https://img.ams1.imgbed.xyz/2021/03/12/1KTEH.png']"/>
                         </div>
                     </div>
                 </div>
                 <div class="applicant-leave">
+                    <div class="text" style="margin: 10px 0;">已联系学生家长及相关宿管</div>
                     <div class="info-item">
                         <div class="info-text">是否离校：</div>
                         <div class="text" v-text="'不离校'"/>
+                    </div>
+                    <div class="info-item">
+                        <div class="info-text">承诺书：</div>
+                        <el-image :src="commitment"
+                                  style="width: 50px;height: 50px;"
+                                  :previewSrcList="[commitment]"/>
                     </div>
                 </div>
             </div>
@@ -99,7 +107,8 @@
                 long: '01 时 00 分',
                 start: new Date().format("yyyy-MM-dd hh:mm:ss"),
                 reason: '出去吃饭',
-                counselor: null
+                counselor: null,
+                commitment: null
             }
         },
         created() {
@@ -110,6 +119,7 @@
             this.cla = data['cla'];
             this.reason = data['reason'];
             this.counselor = data['counselor'];
+            this.commitment = data['commitment'];
         },
         mounted() {
             let timestamp = document.getElementsByClassName('el-timeline-item__timestamp').item(1);
