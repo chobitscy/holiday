@@ -35,16 +35,21 @@
                 dialogVisible: false
             }
         },
+        created(){
+            const data = localStorage.getItem('values');
+            if (data !== null) this.values = JSON.parse(data);
+        },
         computed: {
             disabled() {
-                if (!Object.values(this.values).every(v => !!v))
-                    return true;
+                if (localStorage.getItem('values') !== null) return !this.checked;
+                if (!Object.values(this.values).every(v => !!v)) return true;
                 else return !this.checked;
             }
         },
         methods: {
             result() {
-                this.$router.push('/result/' + JSON.stringify(this.values))
+                if (localStorage.getItem('values') === null) localStorage.setItem('values', JSON.stringify(this.values));
+                this.$router.push('/result')
             }
         }
     }

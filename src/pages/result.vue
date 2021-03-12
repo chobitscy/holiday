@@ -103,7 +103,9 @@
             }
         },
         created() {
-            const data = JSON.parse(this.values);
+            let data = localStorage.getItem('values');
+            if (data === null) this.$router.replace('/');
+            else data = JSON.parse(data);
             this.applicant = data['applicant'];
             this.cla = data['cla'];
             this.reason = data['reason'];
