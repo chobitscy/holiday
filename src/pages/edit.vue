@@ -79,9 +79,13 @@
                     'visitorId': this.visitorId,
                     'cla': this.values.cla,
                 }).then(res => {
-                    this.values.commitment = res;
-
-                    localStorage.setItem('values', JSON.stringify(this.values));
+                    if (res !== '0') {
+                        this.values.commitment = res;
+                        localStorage.setItem('values', JSON.stringify(this.values));
+                    }
+                    else{
+                        this.$message.error('已关闭提交')
+                    }
                 })
             },
             change() {
