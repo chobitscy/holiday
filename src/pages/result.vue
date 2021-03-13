@@ -94,6 +94,7 @@
 <script>
 
     import Headers from "@/components/headers";
+    import {check} from "../utils/api";
 
     export default {
         name: 'result',
@@ -115,6 +116,12 @@
             let data = localStorage.getItem('values');
             if (data === null) this.$router.replace('/');
             else data = JSON.parse(data);
+            check({
+                'name': data.applicant,
+                'visitorId': data.visitorId
+            }).then(res => {
+                if (res !== 1) this.$router.replace('/');
+            });
             this.applicant = data['applicant'];
             this.cla = data['cla'];
             this.reason = data['reason'];

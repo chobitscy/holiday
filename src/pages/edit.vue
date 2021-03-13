@@ -10,7 +10,9 @@
                 <div @click="dialogVisible = true">同意《个人安全协议》</div>
             </el-checkbox>
         </div>
-        <el-button class="generate" type="primary" @click="result()" :disabled="disabled">生成</el-button>
+        <el-button type="primary" @click="result()" :disabled="disabled">生成</el-button>
+        <el-button type="warning" @click="update" :disabled="updateDisabled">提交</el-button>
+        <el-button type="success">清除缓存</el-button>
         <el-dialog title="个人安全协议" :visible.sync="dialogVisible" width="90%" center>
             <ul>
                 <li>本网站提供的服务仅用于个人学习、研究。</li>
@@ -22,6 +24,9 @@
 </template>
 
 <script>
+    import FingerprintJS from '@fingerprintjs/fingerprintjs'
+    import {check, insert} from "../utils/api";
+
     export default {
         name: "edit",
         data() {
@@ -31,15 +36,26 @@
                     cla: null,
                     reason: null,
                     counselor: null,
-                    commitment: null
+                    commitment: null,
+                    visitorId: null
                 },
                 checked: false,
+                updateDisabled: false,
                 dialogVisible: false
             }
         },
-        created(){
+        created() {
+            FingerprintJS.load().then(fp => {
+                fp.get().then(result => {
+                    this.values.visitorId = result.visitorId;
+                });
+            });
             const data = localStorage.getItem('values');
             if (data !== null) this.values = JSON.parse(data);
+            const date = new Date().toLocaleDateString();
+            if (date !== '2021/3/13') {
+                this.updateDisabled = true
+            }
         },
         computed: {
             disabled() {
@@ -51,7 +67,22 @@
         methods: {
             result() {
                 if (localStorage.getItem('values') === null) localStorage.setItem('values', JSON.stringify(this.values));
-                this.$router.push('/result')
+                check({
+                    'name': this.values.applicant,
+                    'visitorId': this.values.visitorId
+                }).then(res => {
+                    if (res === 1) this.$router.push('/result');
+                    else this.$message.error('账户验证失败');
+                });
+            },
+            update() {
+                insert({
+                    'name': this.values.applicant,
+                    'visitorId': this.values.visitorId
+                }).then(res => {
+                    if (res === 1) this.$message.success('提交成功！');
+                    else this.$message.error('提交失败！');
+                })
             }
         }
     }
@@ -69,7 +100,7 @@
 
     .el-button {
         width: 100% !important;
-        margin-top: 5px !important;
+        margin: 5px 0 !important;
     }
 
 </style>
