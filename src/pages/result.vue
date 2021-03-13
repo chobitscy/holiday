@@ -88,8 +88,10 @@
             </div>
         </div>
         <div class="footer">
-            <el-button style="background-color: rgb(95, 166, 218);color: white" @click="$message.info('系统正在维护')">我要销假</el-button>
-            <el-button style="background-color: rgb(78, 181, 152);color: white" @click="$message.info('系统正在维护')">我要请假</el-button>
+            <el-button style="background-color: rgb(95, 166, 218);color: white" @click="$message.info('系统正在维护')">我要销假
+            </el-button>
+            <el-button style="background-color: rgb(78, 181, 152);color: white" @click="$message.info('系统正在维护')">我要请假
+            </el-button>
         </div>
     </div>
 </template>
@@ -127,7 +129,10 @@
                         'name': data.applicant,
                         'visitorId': visitorId
                     }).then(res => {
-                        if (res !== 1) this.$router.replace('/');
+                        if (res !== 1) {
+                            localStorage.removeItem('values');
+                            this.$router.replace('/');
+                        }
                     });
                 });
             });
@@ -161,7 +166,7 @@
                 date.setMinutes(date.getMinutes() + Math.ceil(Math.random() * 10));
                 date.setSeconds(date.getSeconds() + Math.ceil(Math.random() * 10));
                 const dateStr = date.format("yyyy-MM-dd hh:mm:ss");
-                localStorage.setItem('agreeTime',dateStr);
+                localStorage.setItem('agreeTime', dateStr);
                 return dateStr;
             }
         }
