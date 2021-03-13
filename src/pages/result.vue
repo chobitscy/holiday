@@ -95,6 +95,7 @@
 
     import Headers from "@/components/headers";
     import {check} from "../utils/api";
+    import FingerprintJS from "@fingerprintjs/fingerprintjs";
 
     export default {
         name: 'result',
@@ -116,11 +117,16 @@
             let data = localStorage.getItem('values');
             if (data === null) this.$router.replace('/');
             else data = JSON.parse(data);
-            check({
-                'name': data.applicant,
-                'visitorId': data.visitorId
-            }).then(res => {
-                if (res !== 1) this.$router.replace('/');
+            FingerprintJS.load().then(fp => {
+                fp.get().then(result => {
+                    const visitorId = result.visitorId;
+                    check({
+                        'name': data.applicant,
+                        'visitorId': visitorId
+                    }).then(res => {
+                        if (res !== 1) this.$router.replace('/');
+                    });
+                });
             });
             this.applicant = data['applicant'];
             this.cla = data['cla'];
