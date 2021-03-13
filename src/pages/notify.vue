@@ -43,6 +43,7 @@
 </script>
 
 <style scoped>
+
     .container{
         height: 100%;
         width: 100%;
@@ -57,7 +58,7 @@
         margin: 5px 0;
         color: #8c939d;
         text-align: center;
-        font-size: 0.2rem;
+        font-size: 0.8rem;
         transform: scale(0.8, 0.8);
     }
 
@@ -74,7 +75,7 @@
     }
 
     .detail{
-        font-size: 0.5rem;
+        font-size: 0.7rem;
         padding: 3px 0;
         display: flex;
         justify-content: space-between;
@@ -88,7 +89,7 @@
     }
 
     .read-text{
-        font-size: 0.3rem;
+        font-size: 0.8rem;
         color: #999;
     }
 </style>
