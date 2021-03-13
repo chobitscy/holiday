@@ -5,7 +5,7 @@ let loadingInstance = null;     // 加载全局的loading
 
 const instance = axios.create({
     timeout: 10000, // 设置超时时间10s
-    baseURL: 'http://104.168.14.87:5000' //根据配置的反向代理去设置不同环境的baeUrl
+    baseURL: 'https://v1.chobits.best/holiday' //根据配置的反向代理去设置不同环境的baeUrl
 });
 
 // 统一设置post请求头
