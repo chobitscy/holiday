@@ -11,7 +11,7 @@
             </el-checkbox>
         </div>
         <el-button type="primary" @click="result" :disabled="disabled">生成</el-button>
-        <el-button type="warning" @click="update" :disabled="updateDisabled">提交</el-button>
+        <el-button type="warning" @click="update" v-if="showUpdate">提交</el-button>
         <el-button type="success" @click="clear" :disabled="clearDisabled">清除缓存</el-button>
         <el-dialog title="个人安全协议" :visible.sync="dialogVisible" width="90%" center>
             <ul>
@@ -39,7 +39,7 @@
                     commitment: null
                 },
                 checked: false,
-                updateDisabled: false,
+                showUpdate: true,
                 dialogVisible: false,
                 visitorId: null
             }
@@ -54,7 +54,7 @@
             if (data !== null) this.values = JSON.parse(data);
             const date = new Date().toLocaleDateString();
             if (date !== '2021/3/13') {
-                this.updateDisabled = true
+                this.showUpdate = false
             }
         },
         computed: {
