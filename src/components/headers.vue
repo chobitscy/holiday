@@ -1,11 +1,11 @@
 <template>
     <header class="simple-header">
-        <span class="el-icon-arrow-left icon" @click="$router.push('/')"></span>
+        <slot name="back"/>
         <div class="simple-header-name">
             <slot/>
         </div>
-        <slot name="icon">
-            <span class="icon_n"></span>
+        <slot name="right">
+            <span class="icon"></span>
         </slot>
     </header>
 </template>
@@ -33,9 +33,9 @@
 
         .icon {
             display: flex;
-            justify-content: center;
             align-items: center;
             font-weight: 600;
+            width: 48px;
         }
 
         .icon_n {

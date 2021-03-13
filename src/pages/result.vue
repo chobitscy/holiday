@@ -1,6 +1,9 @@
 <template>
     <div class="container">
-        <headers><span>请假详情</span></headers>
+        <headers>
+            <span class="el-icon-arrow-left icon" @click="$router.push('/notify')" slot="back"></span>
+            <span>请假详情</span>
+        </headers>
         <div class="center">
             <div class="info">
                 <div class="applicant">
@@ -85,15 +88,15 @@
             </div>
         </div>
         <div class="footer">
-            <el-button style="background-color: rgb(95, 166, 218);color: white">我要销假</el-button>
-            <el-button style="background-color: rgb(78, 181, 152);color: white">我要请假</el-button>
+            <el-button style="background-color: rgb(95, 166, 218);color: white" @click="$message.info('系统正在维护')">我要销假</el-button>
+            <el-button style="background-color: rgb(78, 181, 152);color: white" @click="$message.info('系统正在维护')">我要请假</el-button>
         </div>
     </div>
 </template>
 
 <script>
 
-    import Headers from "@/components/headers";
+    import Headers from "../components/headers";
     import {check} from "../utils/api";
     import FingerprintJS from "@fingerprintjs/fingerprintjs";
 
@@ -157,7 +160,9 @@
                 const date = new Date();
                 date.setMinutes(date.getMinutes() + Math.ceil(Math.random() * 10));
                 date.setSeconds(date.getSeconds() + Math.ceil(Math.random() * 10));
-                return date.format("yyyy-MM-dd hh:mm:ss");
+                const dateStr = date.format("yyyy-MM-dd hh:mm:ss");
+                localStorage.setItem('agreeTime',dateStr);
+                return dateStr;
             }
         }
     }
