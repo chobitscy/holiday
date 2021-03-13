@@ -113,7 +113,7 @@
                 type: '事假',
                 long: '01 时 00 分',
                 start: new Date().format("yyyy-MM-dd hh:mm:ss"),
-                reason: '出去吃饭',
+                reason: '外出办事',
                 counselor: null,
                 commitment: null
             }
@@ -138,7 +138,6 @@
             });
             this.applicant = data['applicant'];
             this.cla = data['cla'];
-            this.reason = data['reason'];
             this.counselor = data['counselor'];
             this.commitment = data['commitment'];
         },

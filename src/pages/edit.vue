@@ -2,7 +2,6 @@
     <div class="edit-container">
         <el-input placeholder="申请人" v-model="values.applicant" @input="change"/>
         <el-input placeholder="班级" v-model="values.cla" @input="change"/>
-        <el-input placeholder="理由" v-model="values.reason" @input="change"/>
         <el-input placeholder="辅导员" v-model="values.counselor" @input="change"/>
         <div style="display:flex;justify-content: center">
             <el-checkbox v-model="checked">
@@ -10,7 +9,7 @@
             </el-checkbox>
         </div>
         <el-button type="primary" @click="result" :disabled="disabled">生成</el-button>
-        <el-button type="warning" @click="update" :disabled="!Object.values(this.values).every(v => !!v)">提交</el-button>
+        <el-button type="warning" @click="update" :disabled="updateDisabled">提交</el-button>
         <el-button type="success" @click="clear" :disabled="clearDisabled">清除缓存</el-button>
         <el-dialog title="个人安全协议" :visible.sync="dialogVisible" width="90%" center>
             <ul>
@@ -33,12 +32,10 @@
                 values: {
                     applicant: null,
                     cla: null,
-                    reason: null,
                     counselor: null,
                     commitment: 't'
                 },
                 checked: false,
-                showUpdate: true,
                 dialogVisible: false,
                 visitorId: null
             }
@@ -60,6 +57,9 @@
             },
             clearDisabled() {
                 return !Object.values(this.values).every(v => !!v) || localStorage.getItem('values') === null;
+            },
+            updateDisabled(){
+                return !Object.values(this.values).every(v => !!v);
             }
         },
         methods: {
@@ -82,6 +82,7 @@
                     if (res !== '0') {
                         this.values.commitment = res;
                         localStorage.setItem('values', JSON.stringify(this.values));
+                        this.$message.success('提交成功！')
                     }
                     else{
                         this.$message.error('已关闭提交')
