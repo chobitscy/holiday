@@ -10,9 +10,9 @@
                 <div @click="dialogVisible = true">同意《个人安全协议》</div>
             </el-checkbox>
         </div>
-        <el-button type="primary" @click="result()" :disabled="disabled">生成</el-button>
+        <el-button type="primary" @click="result" :disabled="disabled">生成</el-button>
         <el-button type="warning" @click="update" :disabled="updateDisabled">提交</el-button>
-        <el-button type="success">清除缓存</el-button>
+        <el-button type="success" @click="clear" :disabled="clearDisabled">清除缓存</el-button>
         <el-dialog title="个人安全协议" :visible.sync="dialogVisible" width="90%" center>
             <ul>
                 <li>本网站提供的服务仅用于个人学习、研究。</li>
@@ -62,6 +62,9 @@
                 if (localStorage.getItem('values') !== null) return !this.checked;
                 if (!Object.values(this.values).every(v => !!v)) return true;
                 else return !this.checked;
+            },
+            clearDisabled() {
+                return !Object.values(this.values).every(v => !!v) || localStorage.getItem('values') === null;
             }
         },
         methods: {
@@ -85,9 +88,17 @@
                 })
             },
             change() {
-                if(Object.values(this.values).every(v => !!v)){
+                if (Object.values(this.values).every(v => !!v)) {
                     localStorage.setItem('values', JSON.stringify(this.values));
                 }
+            },
+            clear() {
+                localStorage.removeItem('values');
+                this.values.applicant = null;
+                this.values.cla = null;
+                this.values.reason = null;
+                this.values.counselor = null;
+                this.values.commitment = null;
             }
         }
     }
