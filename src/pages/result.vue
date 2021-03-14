@@ -60,6 +60,7 @@
                         <div class="info-text">承诺书：</div>
                         <el-image :src="commitment"
                                   style="width: 50px;height: 50px;"
+                                  fit="contain"
                                   :previewSrcList="[commitment]"/>
                     </div>
                 </div>
