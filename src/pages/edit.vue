@@ -79,7 +79,7 @@
                     'visitorId': this.visitorId,
                     'cla': this.values.cla,
                 }).then(res => {
-                    if (res !== '0') {
+                    if (res !== 0) {
                         this.values.commitment = res;
                         localStorage.setItem('values', JSON.stringify(this.values));
                         this.$message.success('提交成功！')
