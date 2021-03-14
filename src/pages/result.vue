@@ -89,9 +89,9 @@
             </div>
         </div>
         <div class="footer">
-            <el-button style="background-color: rgb(95, 166, 218);color: white" @click="$message.info('系统正在维护')">我要销假
+            <el-button style="background-color: rgb(95, 166, 218);color: white" @click="info">我要销假
             </el-button>
-            <el-button style="background-color: rgb(78, 181, 152);color: white" @click="$message.info('系统正在维护')">我要请假
+            <el-button style="background-color: rgb(78, 181, 152);color: white" @click="info">我要请假
             </el-button>
         </div>
     </div>
@@ -168,6 +168,15 @@
                 const dateStr = date.format("yyyy-MM-dd hh:mm:ss");
                 localStorage.setItem('agreeTime', dateStr);
                 return dateStr;
+            }
+        },
+        methods:{
+            info(){
+                this.$confirm('当前网络不稳定', '提示', {
+                    type: 'warning'
+                }).then(() => {
+                }).catch(() => {
+                });
             }
         }
     }

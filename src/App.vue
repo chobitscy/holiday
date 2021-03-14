@@ -9,5 +9,16 @@ export default {
 </script>
 
 <style>
-  .el-dialog__body{padding: 10px 10px!important;}
+  .el-dialog__body{
+    padding: 10px 10px!important;
+  }
+  @media screen and (max-width: 750px) {
+    .el-message-box {
+      width: 70% !important;
+    }
+  }
+
+  .el-message-box__btns{
+    display: none!important;
+  }
 </style>

@@ -44,7 +44,6 @@
             FingerprintJS.load().then(fp => {
                 fp.get().then(result => {
                     this.visitorId = result.visitorId;
-                    console.log(this.visitorId);
                 });
             });
             const data = localStorage.getItem('values');
