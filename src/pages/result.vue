@@ -139,7 +139,8 @@
             this.applicant = data['applicant'];
             this.cla = data['cla'];
             this.counselor = data['counselor'];
-            this.commitment = localStorage.getItem('commitment');
+            const commitment = localStorage.getItem('commitment');
+            this.commitment = commitment === null ? data['commitment'] : commitment;
         },
         mounted() {
             let timestamp = document.getElementsByClassName('el-timeline-item__timestamp').item(1);
