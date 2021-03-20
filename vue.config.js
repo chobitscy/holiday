@@ -25,9 +25,9 @@ module.exports = {
     publicPath: './',
     productionSourceMap: false,
     chainWebpack: config => {
-        config
-            .plugin('webpack-bundle-analyzer')
-            .use(require('webpack-bundle-analyzer').BundleAnalyzerPlugin);
+        // config
+        //     .plugin('webpack-bundle-analyzer')
+        //     .use(require('webpack-bundle-analyzer').BundleAnalyzerPlugin);
         config.plugin('html').tap(args => {
             args[0].cdn = cdn;
             return args
