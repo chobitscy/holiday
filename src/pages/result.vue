@@ -140,7 +140,7 @@
             this.cla = data['cla'];
             this.counselor = data['counselor'];
             const commitment = localStorage.getItem('commitment');
-            this.commitment = commitment === null ? data['commitment'] : commitment;
+            this.commitment = commitment === null ? data['commitment'] : JSON.parse(commitment);
         },
         mounted() {
             let timestamp = document.getElementsByClassName('el-timeline-item__timestamp').item(1);
