@@ -29,7 +29,7 @@
                     </div>
                     <div class="info-item">
                         <div class="info-text">开始时间：</div>
-                        <div class="text" v-text="start"/>
+                        <div class="text" v-text="getStart.format('yyyy-MM-dd hh:mm:ss')"/>
                     </div>
                     <div class="info-item">
                         <div class="info-text">结束时间：</div>
@@ -112,8 +112,7 @@
                 applicant: 'xxx',
                 cla: '',
                 type: '事假',
-                long: '01 时 00 分',
-                start: new Date().format("yyyy-MM-dd hh:mm:ss"),
+                long: '03 时 00 分',
                 reason: '外出办事',
                 counselor: null,
                 commitment: null
@@ -151,27 +150,33 @@
         },
         computed: {
             getTime() {
-                const date = new Date();
-                date.setHours(date.getHours() - 1);
+                let date = new Date();
+                date.setHours(date.getHours() - 3);
                 date.setMinutes(date.getMinutes() + Math.ceil(Math.random() * 10));
                 return date.format("yyyy-MM-dd hh:mm:ss");
             },
             getEnd() {
-                const date = new Date();
-                date.setHours(date.getHours() + 1);
+                let date = this.getStart;
+                date.setHours(date.getHours() + 3);
                 return date.format("yyyy-MM-dd hh:mm:ss");
             },
             getAgreeTime() {
-                const date = new Date();
+                let date = new Date();
                 date.setMinutes(date.getMinutes() + Math.ceil(Math.random() * 10));
                 date.setSeconds(date.getSeconds() + Math.ceil(Math.random() * 10));
                 const dateStr = date.format("yyyy-MM-dd hh:mm:ss");
                 localStorage.setItem('agreeTime', dateStr);
                 return dateStr;
+            },
+            getStart() {
+                let date = new Date();
+                date.setMinutes(date.getMinutes() - Math.ceil(Math.random() * 60));
+                date.setSeconds(date.getSeconds() - Math.ceil(Math.random() * 60));
+                return date;
             }
         },
-        methods:{
-            info(){
+        methods: {
+            info() {
                 this.$confirm('当前网络不稳定', '提示', {
                     type: 'warning'
                 }).then(() => {
