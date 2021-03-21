@@ -29,7 +29,7 @@
                     </div>
                     <div class="info-item">
                         <div class="info-text">开始时间：</div>
-                        <div class="text" v-text="getStart.format('yyyy-MM-dd hh:mm:ss')"/>
+                        <div class="text" v-text="getStatStr"/>
                     </div>
                     <div class="info-item">
                         <div class="info-text">结束时间：</div>
@@ -102,6 +102,7 @@
     import Headers from "../components/headers";
     import {check} from "../utils/api";
     import FingerprintJS from "@fingerprintjs/fingerprintjs";
+    import moment from "moment";
 
     export default {
         name: 'result',
@@ -154,18 +155,18 @@
                 let date = new Date();
                 date.setHours(date.getHours() - 3);
                 date.setMinutes(date.getMinutes() + Math.ceil(Math.random() * 10));
-                return date.format("yyyy-MM-dd hh:mm:ss");
+                return moment(date).format('YYYY-MM-DD HH:MM:SS');
             },
             getEnd() {
                 let date = this.getStart;
                 date.setHours(date.getHours() + 3);
-                return date.format("yyyy-MM-dd hh:mm:ss");
+                return moment(date).format('YYYY-MM-DD HH:mm:ss');
             },
             getAgreeTime() {
                 let date = new Date();
                 date.setMinutes(date.getMinutes() + Math.ceil(Math.random() * 10));
                 date.setSeconds(date.getSeconds() + Math.ceil(Math.random() * 10));
-                const dateStr = date.format("yyyy-MM-dd hh:mm:ss");
+                const dateStr = moment(date).format('YYYY-MM-DD HH:MM:SS');
                 localStorage.setItem('agreeTime', dateStr);
                 return dateStr;
             },
@@ -174,6 +175,9 @@
                 date.setMinutes(date.getMinutes() - Math.ceil(Math.random() * 60));
                 date.setSeconds(date.getSeconds() - Math.ceil(Math.random() * 60));
                 return date;
+            },
+            getStatStr(){
+                return moment(this.getStart).format('YYYY-MM-DD HH:MM:SS');
             }
         },
         methods: {
@@ -293,7 +297,7 @@
         word-break: break-all;
         border-radius: 50%;
         color: rgb(50 193 221);
-        box-shadow: 0 0 0 3px #ffffff, 0 0 0px 0px rgb(50 193 221), 0 0 0 6px #fff, 0 0 0 7px rgb(52 175 199 / 28%), 0 0 0px 16px #fff, 0 0 0px 18px rgb(50 193 221);
+        box-shadow: 0 0 0 3px #ffffff, 0 0 0 0 rgb(50 193 221), 0 0 0 6px #fff, 0 0 0 7px rgba(52,175,199,0.28), 0 0 0 16px #fff, 0 0 0 18px rgb(50 193 221);
         font-size: 0.5rem;
         transform: rotate(
                 -30deg
